@@ -1,0 +1,769 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Surveyor Dashboard - Jharkhand</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { text-align: left; padding: 8px; border: 1px solid #ddd; }
+        tr:hover { background-color: #f1f1f1; cursor: pointer; }
+        .details-row td { background-color: #fcfcfc; border-top: none; }
+        input[type="text"] {
+            width: 30%; padding: 6px; margin-bottom: 12px; border: 1px solid #ccc;
+        }
+    </style>
+    <script>
+        const data = {0: {'Name': 'Swapan Kumar Sadhu', 'Place': 'Jamshedpur', 'Departments': 'FIRE | MISC | MOTOR', 'SLA No': '2467', 'SLA Validity': '14-09-2023', 'Phone No': 9431762644.0, 'Email Id': 'sk_sadhu2005@yahoo.com', 'Address': 'Mercury 22- Aastha Space Town- Dimna road- Mango- Jamshedpur- Jharkhand 831018', 'Date of Birth': '15-05-1951'}, 1: {'Name': 'Asoke Kumar Jana', 'Place': 'Dumka', 'Departments': 'MOTOR', 'SLA No': '58586', 'SLA Validity': '26-02-2023', 'Phone No': 9431395844.0, 'Email Id': 'jana.asoke@gmail.com', 'Address': 'Madhusudan Vatika- Kumar Para- Ward No - 4- Near Kali Mandir- Dumka - 814101- Jharkhand.', 'Date of Birth': '25-08-1973'}, 2: {'Name': 'Brijnandan Narayan Singh', 'Place': 'Ramgarh Cantt', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '13872', 'SLA Validity': '23-09-2022', 'Phone No': 7992301845.0, 'Email Id': 'bnsingh123@gmail.com', 'Address': 'Patratu Basti- Near Block Office- Ramgarh Cantt -before Mahadeo Mandir- Dist-Ramgarh- Jharkhand- 829122.', 'Date of Birth': '25-02-1958'}, 3: {'Name': 'Sanjay Kumar Singh', 'Place': 'Dhanbad', 'Departments': 'ENGG | MARINE CARGO | MISC | MOTOR', 'SLA No': '40027', 'SLA Validity': '15-03-2021', 'Phone No': 8210512231.0, 'Email Id': 'sanjaysingh_sur@yahoo.co.in', 'Address': 'Flat No.101-V.T.Apartment-Shastri Nagar West-Dhobatand-Dhanbad-826001', 'Date of Birth': '10-07-1971'}, 4: {'Name': 'Upendra Narayan Singh', 'Place': 'Dhanbad', 'Departments': 'ENGG | FIRE | MARINE CARGO | MISC | MOTOR', 'SLA No': '52403', 'SLA Validity': '10-09-2023', 'Phone No': 7903842053.0, 'Email Id': 'singhupendra7171@gmail.com', 'Address': '# Flat No.201.V.T.Apartment- Shastri Nagar(West)-Dhobatand- Dhanbad-826001', 'Date of Birth': '26-09-1965'}, 5: {'Name': 'Rajesh Ranjan Singh', 'Place': 'Dhanbad', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '30470', 'SLA Validity': '20-11-2020', 'Phone No': 9835122109.0, 'Email Id': 'rajeshdhn.singh@gmail.com', 'Address': 'Dhaiya (Lahbani)-Behind ISM Emerald Hoste-Ladhanbad-Dhanbad-826004', 'Date of Birth': '08-01-1958'}, 6: {'Name': 'Rakesh Kumar', 'Place': 'Dhanbad', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '53871', 'SLA Validity': '30-01-2022', 'Phone No': 9334008881.0, 'Email Id': 'rakesh_ias@rediffmail.com', 'Address': '# 206 A- Ganeshalay Apartment- Beside Carmel School- Jharudih- Dhanbad. 826001.', 'Date of Birth': '25-12-1964'}, 7: {'Name': 'Shyam Narayan Jha', 'Place': 'Deoghar', 'Departments': 'ENGG | MISC | MOTOR', 'SLA No': '71703', 'SLA Validity': '21-11-2022', 'Phone No': 9431132449.0, 'Email Id': 'shyam_narayanjha@yahoo.co.in', 'Address': 'Surya Prabha- Pokhna Tilha- Pt.B.N.Jha Road- B.Deoghar-814112', 'Date of Birth': '14-01-1972'}, 8: {'Name': 'Suresh Kumar Saraff', 'Place': 'Deoghar', 'Departments': 'FIRE | MARINE CARGO | MOTOR', 'SLA No': '23712', 'SLA Validity': '07-05-2022', 'Phone No': 9234160112.0, 'Email Id': 'suresh.saraff@yahoo.com', 'Address': 'Shital Mallick Road- Town-Bilasi- Deoghar-814112', 'Date of Birth': '01-05-1963'}, 9: {'Name': 'Sanjay Kumar', 'Place': 'Bokaro', 'Departments': 'ENGG | MISC | MOTOR', 'SLA No': '63312', 'SLA Validity': '19-03-2024', 'Phone No': 9470162481.0, 'Email Id': 'sanjay3462@rediffmail.com', 'Address': 'Q.No.4034- S.No.6B- Bokaro Steel City-827006', 'Date of Birth': '28-10-1974'}, 10: {'Name': 'Surendra Kumar', 'Place': 'Bokaro', 'Departments': 'ENGG | FIRE | MARINE CARGO', 'SLA No': '62863', 'SLA Validity': '17-02-2024', 'Phone No': 6200579019.0, 'Email Id': 'surendra.4034@rediffmail.com', 'Address': 'Sector- Vib- Q.No.4034- B.S.City- Dist.Bokaro', 'Date of Birth': '12-12-1967'}, 11: {'Name': 'Kishore Kumar Jha', 'Place': 'Deoghar', 'Departments': 'ENGG | MISC', 'SLA No': '53507', 'SLA Validity': '18-12-2021', 'Phone No': 9431154523.0, 'Email Id': 'kkjha69@gmail.com', 'Address': 'Anganbari- Near Hindi Vidyapith- Poknnatilha- B.N.Jha.Path- B.Deoghar-814112-', 'Date of Birth': '01-02-1960'}, 12: {'Name': 'Abhijit Ghosh', 'Place': 'Jharkhand', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '33177', 'SLA Validity': '17-07-2022', 'Phone No': 9199777351.0, 'Email Id': 'abhijit1958@gmail.com', 'Address': 'Flat no. 304-Dadijee Apartment - Behind ICICI Bank Near Samonta Petrol Pump- Jhumri Telaiya', 'Date of Birth': '18-11-1958'}, 13: {'Name': 'Dhananjay Mishra', 'Place': 'Bokaro', 'Departments': 'MISC', 'SLA No': '71696', 'SLA Validity': '23-11-2022', 'Phone No': 7257952734.0, 'Email Id': 'dhananjaymishra.137@rediffmail.com', 'Address': 'Plot No: A-137- Rajendra Nagar Colony- (K.K.Singh Colony)- Chir Chas Bokaro Jharkhand-827013', 'Date of Birth': '20-12-1967'}, 14: {'Name': 'Nirmalendu Paul', 'Place': 'Dhanbad', 'Departments': 'ENGG | FIRE | MARINE CARGO | MISC | MOTOR', 'SLA No': '39161', 'SLA Validity': '03-01-2024', 'Phone No': 9835160525.0, 'Email Id': 'npaul_dnb@yahoo.com', 'Address': 'Flat No. 1A- Shanti Tower- J.C.Mallick Road- Hirapur-', 'Date of Birth': '31-08-1963'}, 15: {'Name': 'Jitendra Kumar Singh', 'Place': 'Deoghar', 'Departments': 'FIRE | MISC | MOTOR', 'SLA No': '39458', 'SLA Validity': '15-02-2024', 'Phone No': 9431951091.0, 'Email Id': 'jksinghchunchun@gmail.com', 'Address': 'C/O.Yogendra Pd.Singh Siya Kunj Kali Bari Problem Bompas Town Deoghar- 814112', 'Date of Birth': '05-08-1959'}, 16: {'Name': 'Gurumukh Singh', 'Place': 'Jharkhand', 'Departments': 'ENGG | MARINE CARGO | MOTOR', 'SLA No': '17818', 'SLA Validity': '29-12-2020', 'Phone No': 8789577566.0, 'Email Id': 'gurumukhsingh_1234@rediffmail.com', 'Address': 'Telidih More- Bye Pass Road Chas- P.O.Chas- Dist.Bokaro- 827013', 'Date of Birth': '12-04-1958'}, 17: {'Name': 'Ajay Kishore Lall', 'Place': 'Bokaro', 'Departments': 'ENGG | MARINE CARGO | MISC | MOTOR', 'SLA No': '52263', 'SLA Validity': '04-09-2023', 'Phone No': 9431321578.0, 'Email Id': 'ajaykishorelall@yahoo.co.in', 'Address': 'Sector-4/G- Qr.No-2235- Bokaro Steel City- Bokaro-827004', 'Date of Birth': '10-03-1967'}, 18: {'Name': 'Anil Kumar Singh', 'Place': 'Jamshedpur', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '47281', 'SLA Validity': '08-06-2022', 'Phone No': 9431378117.0, 'Email Id': 'anilsingh_kur@rediffmail.com', 'Address': 'Flat No-1461-Strawberry-Sahara Garden City-Adityapur-831014', 'Date of Birth': '05-09-1968'}, 19: {'Name': 'Rabindranath Singh Kushwaha', 'Place': 'Dhanbad', 'Departments': 'ENGG | MARINE CARGO | MISC | MOTOR', 'SLA No': '14167', 'SLA Validity': '30-12-2022', 'Phone No': 9431169013.0, 'Email Id': 'rnskvaluer@gmail.com', 'Address': 'Gandhi Nagar- Bagan Road- Dhanbad 826001- Jharkhand', 'Date of Birth': '31-07-1963'}, 20: {'Name': 'Ajit Kumar Chatterjee', 'Place': 'Dhanbad', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '58292', 'SLA Validity': '17-02-2020', 'Phone No': 9821300882.0, 'Email Id': 'surveyor.ajitchatterjee@gmail.com', 'Address': 'Bich Balihari- Gualapatm- P.O.Kusunda- Ps.Putki- Dist.Dhanbad-828116', 'Date of Birth': '02-06-1954'}, 21: {'Name': 'Surya Narayan Rajgarhia', 'Place': 'Ranchi', 'Departments': 'FIRE | MARINE CARGO | MISC', 'SLA No': '10431', 'SLA Validity': '29-04-2021', 'Phone No': 9431104448.0, 'Email Id': 'snrco@yahoo.co.in', 'Address': 'Ist Floor- 39- Shradhanand Road- Ranchi-834001', 'Date of Birth': '03-02-1958'}, 22: {'Name': 'Motilal Sanatan', 'Place': 'Dhanbad', 'Departments': 'MOTOR', 'SLA No': '31440', 'SLA Validity': '25-02-2022', 'Phone No': 9835126189.0, 'Email Id': 'sanatansurveyor@yahoo.in', 'Address': 'H.No. 236- B-Block- Bhuli Nagar- Dhanbad- PS- Bank More- Dist- Dhanbad-828104', 'Date of Birth': '25-12-1968'}, 23: {'Name': 'Ranjeet Kumar', 'Place': 'Bokaro', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '45787', 'SLA Validity': '23-02-2022', 'Phone No': 9431379436.0, 'Email Id': 'ranjeet.bokarosurveyor@gmail.com', 'Address': 'Flat No - 403 - Welcome Tower - 2 - In Front Of City Mall - Chira Chas - Chas - Bokaro - Jharkhand - 827013', 'Date of Birth': '01-01-1967'}, 24: {'Name': 'Sunil Kumar Singh', 'Place': 'Dhanbad', 'Departments': 'ENGG | FIRE | MARINE CARGO | MISC | MOTOR', 'SLA No': '38297', 'SLA Validity': '22-11-2023', 'Phone No': 9431164281.0, 'Email Id': 'sunilkr_singh64@yahoo.co.in', 'Address': 'Kusum Vihar Colony- Phase-1- Near Himgiri Apartment- P.O-B.C.C.L Township Koyla Nagar- Dhanbad- 826005.', 'Date of Birth': '04-02-1963'}, 25: {'Name': 'Santan Prasad Sinha', 'Place': 'Jharkhand', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '20819', 'SLA Validity': '21-08-2021', 'Phone No': 9431584262.0, 'Email Id': 'santan.surveyer@gmail.com', 'Address': 'Shiv Shakti Nagar- Jodhadih More- Chas- Bokaro -827013', 'Date of Birth': '12-11-1960'}, 26: {'Name': 'Promode Yadav', 'Place': 'Jamshedpur', 'Departments': 'ENGG | MARINE CARGO | MOTOR', 'SLA No': '68285', 'SLA Validity': '21-03-2022', 'Phone No': 9234601347.0, 'Email Id': 'promodeyadav@yahoo.com', 'Address': '17- Phase 1- Adarsh Nagar - Sonari- Jameshedpur- 834011- Jarkhand', 'Date of Birth': '15-07-1947'}, 27: {'Name': 'Shashi Bhushan', 'Place': 'Bokaro', 'Departments': 'ENGG | FIRE | MOTOR', 'SLA No': '18036', 'SLA Validity': '22-11-2023', 'Phone No': 9430704033.0, 'Email Id': 'bhushanassociates@yahoo.co.in', 'Address': 'Plot No.161-Lohanchal Colony-Bokaro Steel City- Bokaro- 827012', 'Date of Birth': '06-01-1959'}, 28: {'Name': 'Mohan Lal Agarwala', 'Place': 'Giridih', 'Departments': 'FIRE | MISC | MOTOR', 'SLA No': '1672', 'SLA Validity': '21-07-2022', 'Phone No': 9431388289.0, 'Email Id': 'mohan_agarwala@rediffmail.com', 'Address': 'Katchery Road- (Near Hotel Nikhar)-P.O. Giridh- 815301', 'Date of Birth': '23-03-1949'}, 29: {'Name': 'Ranvir Kumar', 'Place': 'Giridih', 'Departments': 'FIRE | MISC | MOTOR', 'SLA No': '47938', 'SLA Validity': '22-07-2022', 'Phone No': 9431335588.0, 'Email Id': 'ranvir_grd@yahoo.co.in', 'Address': 'Koilwan House- Mohanpur- PO-Pachemba- Dt.Giridih-815316', 'Date of Birth': '02-06-1972'}, 30: {'Name': 'Sanjiv Kumar', 'Place': 'Deoghar', 'Departments': 'ENGG | MISC | MOTOR', 'SLA No': '60126', 'SLA Validity': '09-07-2023', 'Phone No': 9431188572.0, 'Email Id': 'sanjiv_bambam@yahoo.co.in', 'Address': 'Bompass Town-Shiv Mandir Road-Dist-Deoghar-Jharkhand', 'Date of Birth': '02-10-1972'}, 31: {'Name': 'Sandeep Kumar Mitra', 'Place': 'Ghatsila', 'Departments': 'MISC | MOTOR', 'SLA No': '63003', 'SLA Validity': '01-03-2024', 'Phone No': 9431544097.0, 'Email Id': 'skmitra1956@yahoo.com', 'Address': 'House No.117- College Road- Netaji Palli- Fuldungri- Ghatsila-832303', 'Date of Birth': '01-12-1956'}, 32: {'Name': 'VIDYA BHUSHAN PRASAD', 'Place': 'Ranchi', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '20870', 'SLA Validity': '06-09-2021', 'Phone No': 9431597679.0, 'Email Id': 'vidya.sharda@gmail.com', 'Address': 'C/o Umesh Prasad Chaurasia- At. Chuna Bhatta- Kokar- P O Ranchi-pIn 834001 Dist Ranchi- Jharkhand', 'Date of Birth': '03-12-1966'}, 33: {'Name': 'Satish Prasad', 'Place': 'Bokaro', 'Departments': 'FIRE | MARINE CARGO | MOTOR', 'SLA No': '28219', 'SLA Validity': '10-05-2023', 'Phone No': 7903043706.0, 'Email Id': 'maachinmastika@gmail.com', 'Address': 'N.B.Enterprises- Prop.Satish Prasad- Behind LAL Mohan Petrol pump- H.no.1487-New Road- Phusro- Dist- Bokaro(JHARKHAND) PIN -829144', 'Date of Birth': '10-05-1964'}, 34: {'Name': 'Krishna Kumar', 'Place': 'Bokaro Steel City', 'Departments': 'MOTOR', 'SLA No': '46569', 'SLA Validity': '21-04-2022', 'Phone No': 9835102546.0, 'Email Id': 'krishna_4g@rediffmail.com', 'Address': 'Qr No - 1205- Sector - IV/G- Bokaro Steel City- Dist-Bokaro- Jharkhand - 827004', 'Date of Birth': '28-05-1970'}, 35: {'Name': 'Ranjit Kumar Singh', 'Place': 'Jameshedpur', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '28405', 'SLA Validity': '03-06-2020', 'Phone No': 8987579312.0, 'Email Id': 'singhrk0910@gmail.com', 'Address': '3324- Phaser- V- Vijay Heritage - Kadma - Jamshedpur - 831005- Jharkhanad', 'Date of Birth': '01-01-1970'}, 36: {'Name': 'Haribinder Singh', 'Place': 'Jameshedpur', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '8216', 'SLA Validity': '01-02-2022', 'Phone No': 9234581794.0, 'Email Id': 'harbindersingh19@yahoo.com', 'Address': 'Zone 1B Birsanagar- Near Bhubneshwari Mandir- PO- Telco- Jamshedpur Singhbhum East 831004', 'Date of Birth': '19-05-1954'}, 37: {'Name': 'Mangal Deo Shukla', 'Place': 'JAMSHEDPUR', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '28889', 'SLA Validity': '19-07-2023', 'Phone No': 9431300719.0, 'Email Id': 'mangaldevshukla@yahoo.in', 'Address': 'House No.-24- Road No.-2- Housing Society Colony- Parsudih- P.O- Tatanagar- Jamshedpur- Purbi SInghbhum- Jharkhand- 831002', 'Date of Birth': '01-07-1965'}, 38: {'Name': 'Ajit Kumar Sahu', 'Place': 'Ranchi', 'Departments': 'ENGG | FIRE | MISC', 'SLA No': '32439', 'SLA Validity': '13-05-2022', 'Phone No': 9835164636.0, 'Email Id': 'ajitsahu.ranchi@gmail.com', 'Address': 'HI-62-Harmu Housing Colony-Harmu Ranchi-834002', 'Date of Birth': '14-01-1946'}, 39: {'Name': 'Birendra Kumar Gupta', 'Place': 'Ranchi', 'Departments': 'FIRE | MARINE CARGO | MOTOR', 'SLA No': '35215', 'SLA Validity': '05-01-2023', 'Phone No': 9431353927.0, 'Email Id': 'birendrababa@gmail.com', 'Address': 'Opp Jaiswal Petrol Pump- Near Canara Bank- Ratu Road- Ranchi - 834001', 'Date of Birth': '20-02-1969'}, 40: {'Name': 'Lalit Kumar Singh', 'Place': 'Ranchi', 'Departments': 'MOTOR', 'SLA No': '34312', 'SLA Validity': '25-11-2022', 'Phone No': 9431169728.0, 'Email Id': 'lksranchi@yahoo.co.in', 'Address': 'Nilkunj- Sukhedeonagar- Near Akhil Memorial School- Ratu Road- PO Hehal- Ranchi - 834005', 'Date of Birth': '20-02-1971'}, 41: {'Name': 'Anirudh Kumar', 'Place': 'Dhurwa', 'Departments': 'FIRE|MARINECAGO |ENGG | MISC | MOTOR|', 'SLA No': '27800', 'SLA Validity': '04-10-2023', 'Phone No': 9431297852.0, 'Email Id': 'go2k_anirudh@yahoo.co.in', 'Address': 'Q R No E/292- Sector - 2- HEC Colony- Dhruwa - 834004', 'Date of Birth': '14-11-1964'}, 42: {'Name': 'Shankar Kumar Singh', 'Place': 'Ranchi', 'Departments': 'FIRE| MARINE CARGO| ENGG | MISC | MOTOR', 'SLA No': '33591', 'SLA Validity': '26-08-2022', 'Phone No': 9431176646.0, 'Email Id': 'shankarkrsingh2001@gmail.com', 'Address': 'Arpan Lajpat Nagar- Near Lala Lajpat Rai Senior Secondary School- Chaptul - Pundag- Ranchi - 834004', 'Date of Birth': '29-01-1968'}, 43: {'Name': 'Arvind Kumar', 'Place': 'Ranchi', 'Departments': 'ENGG | FIRE | MARINE CARGO | MISC | MOTOR', 'SLA No': '29423', 'SLA Validity': '15-08-2023', 'Phone No': 9431105011.0, 'Email Id': 'arvindanni@gmail.com', 'Address': 'Akanksha - Radhanagar- Pandra - Ranchi - 834005', 'Date of Birth': '01-03-1964'}, 44: {'Name': 'Binodanand Jha', 'Place': 'Ranchi', 'Departments': 'ENGG | MOTOR', 'SLA No': '40341', 'SLA Validity': '27-04-2024', 'Phone No': 9431956725.0, 'Email Id': 'j.binodanand@gmail.com', 'Address': 'Kaushakripa - Sarovar Nagar- Near Surya Mandir- Devi Mandeep Road- Hesal - Ranchi - 834005', 'Date of Birth': '01-04-1962'}, 45: {'Name': 'Rakesh Prasad Sinha', 'Place': 'Chas', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '46766', 'SLA Validity': '0000-00-00', 'Phone No': 9931515736.0, 'Email Id': 'rakesh_sinha40@yahoo.com', 'Address': '19-A- Kunj Vihar- Chira Chas.- Chas - 827013', 'Date of Birth': '10-12-1964'}, 46: {'Name': 'Shiwa Brata Ghose', 'Place': 'Ranchi', 'Departments': 'ENGG | MARINE CARGO | MISC', 'SLA No': '5022', 'SLA Validity': '03-09-2022', 'Phone No': 7633856072.0, 'Email Id': 'consultusho@gmail.com', 'Address': 'Cosultus Bina- Hino Bridge (E)- Ranchi - 834002', 'Date of Birth': '03-06-1933'}, 47: {'Name': 'Dilip Kumar Agarwal', 'Place': 'Ranchi', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '17044', 'SLA Validity': '21-09-2023', 'Phone No': 9431169715.0, 'Email Id': 'agarwal.dilipkumar10@gmail.com', 'Address': 'Shiv Durga Mandirlane Near- Rambilash Petrol Pump- Ratu Road- Ranchi - 834001- Jharkhand', 'Date of Birth': '10-01-1963'}, 48: {'Name': 'Jajulya Kumar Das', 'Place': 'Jamshedpur', 'Departments': 'ENGG | MARINE CARGO | MOTOR', 'SLA No': '69541', 'SLA Validity': '27-06-2022', 'Phone No': 9006702419.0, 'Email Id': 'jajulyadas@gmail.com', 'Address': 'Duplex- House no.7 Syndicate colony Uliyan- Post-Kadma Jamshedpur-831005', 'Date of Birth': '20-03-1953'}, 49: {'Name': 'Binod Kumar Bhardwaj', 'Place': 'JAMSHEDPUR', 'Departments': 'MARINE CARGO | MOTOR', 'SLA No': '52622', 'SLA Validity': '23-10-2023', 'Phone No': 9431087194.0, 'Email Id': 'binodkumarbhardwaj007@gmail.com', 'Address': 'FLAT NO. 2 D- BLUE BELLS- SHARDA CITY- MANGO- NH-33- OPPOSITE OF SAHARA CITY- MANGO- JAMSHEDPUR- PIN 831012', 'Date of Birth': '07-03-1965'}, 50: {'Name': 'Sanjay Kumar', 'Place': 'Jamshedpur', 'Departments': 'MARINE CARGO | MOTOR', 'SLA No': '53872', 'SLA Validity': '02-02-2022', 'Phone No': 9430137611.0, 'Email Id': 'skjsr12@gmail.com', 'Address': 'C/2-Nirmal Nagar-Hume Pipe Area- Post-Sakshi- Jamshedpur - 831001', 'Date of Birth': '10-04-1968'}, 51: {'Name': 'Krishna Kumar Singh', 'Place': 'Jamshedpur', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '21898', 'SLA Validity': '11-12-2021', 'Phone No': 9835164906.0, 'Email Id': 'singh.krishna1950@gmail.com', 'Address': '161-Sitaramdera- New Layout- Jamshedpur - 831009', 'Date of Birth': '12-02-1951'}, 52: {'Name': 'Bhola Prasad Singh', 'Place': 'RANCHI', 'Departments': 'MOTOR', 'SLA No': '46312', 'SLA Validity': '05-04-2022', 'Phone No': 9576524763.0, 'Email Id': 'bpsinghvishal@yahoo.com', 'Address': 'Flat No 201- Sushil Sadan. Kalyanpur Road No 5- Singh More- PO Haita - 834003 - Jharkand', 'Date of Birth': '01-01-1973'}, 53: {'Name': 'NAVIN KUMAR', 'Place': 'RANCHI', 'Departments': 'MOTOR', 'SLA No': '66963', 'SLA Validity': '13-12-2021', 'Phone No': 9431371443.0, 'Email Id': 'navinkumar9009@gmail.com', 'Address': '86-BARDWAN COMPOUND- NEAR KALI MANDIR- CIRCULAR ROAD--834001', 'Date of Birth': '11-11-1972'}, 54: {'Name': 'Deepak Lal', 'Place': 'Ranchi', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '54308', 'SLA Validity': '21-02-2022', 'Phone No': 9835167684.0, 'Email Id': 'deepaklalsla@gmail.com', 'Address': 'Arya Nagar- Road No.2 Arya Puri- Ratu Road- Ranchi-834001', 'Date of Birth': '23-10-1965'}, 55: {'Name': 'Shyam Sunder Prasad Singh', 'Place': 'Ranchi', 'Departments': 'MISC | MOTOR', 'SLA No': '69813', 'SLA Validity': '18-07-2022', 'Phone No': 9835165729.0, 'Email Id': 'singhssp001@gmail.com', 'Address': 'C/o Mr. B.L.Mishra- Indrapuri Road No-4- Ratu Road- Ranchi', 'Date of Birth': '02-01-1970'}, 56: {'Name': 'Sanjay Kumar', 'Place': 'Ranchi', 'Departments': 'LOP | MISC | MOTOR', 'SLA No': '59439', 'SLA Validity': '11-05-2023', 'Phone No': 9835781406.0, 'Email Id': 'sanjayjha_011@rediffmail.com', 'Address': 'H. No: F-111- Ashok Vihar (opp_Ashok Nagar Gate No-1) Ashok Nagar- Ranchi.', 'Date of Birth': '20-07-1968'}, 57: {'Name': 'Satbir Singh Bhatia', 'Place': 'Jamshedpur', 'Departments': 'FIRE | MARINE CARGO | MISC', 'SLA No': '21654', 'SLA Validity': '03-11-2021', 'Phone No': 9431756691.0, 'Email Id': 'satbirsi@yahoo.co.in', 'Address': '1st Floor Gurudwara Complex Sakchi- Jamshedpur-831001', 'Date of Birth': '24-01-1958'}, 58: {'Name': 'Manoj Kumar', 'Place': 'Ranchi', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '43562', 'SLA Validity': '21-09-2021', 'Phone No': 9835325664.0, 'Email Id': 'manojkumar5571@rediffmail.com', 'Address': 'Vidya nagar (West) Road No-3- Ahead DAV Swarnrekha School- P.O. Harmu- Dist-Ranchi Jharkhand-834012', 'Date of Birth': '05-05-1971'}, 59: {'Name': 'Birjisut Towheed', 'Place': 'Ranchi', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '20485', 'SLA Validity': '01-08-2021', 'Phone No': 9934219504.0, 'Email Id': 'btowheed@gmail.com', 'Address': '204-Faquiha Palace Timbergali- Near HolidayHome-Kanke Road Ranchi-834008', 'Date of Birth': '02-10-1950'}, 60: {'Name': 'Shakil Ahmed', 'Place': 'Ranchi', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '12461', 'SLA Validity': '16-03-2022', 'Phone No': 9931790446.0, 'Email Id': 'shakilahmed1204@gmail.com', 'Address': 'Mullu Compound- Old H.B.Road No:2- Kanta Toli Chowk- Ranchi-834001', 'Date of Birth': '12-04-1958'}, 61: {'Name': 'Anil Kumar Bazaz', 'Place': 'Ranchi', 'Departments': 'ENGG | MARINE CARGO | MOTOR|', 'SLA No': '5387', 'SLA Validity': '24-01-2023', 'Phone No': 9835339907.0, 'Email Id': 'anil.bazaz10@gmail.com', 'Address': 'Hehal-ratu road-Ranchi-834005', 'Date of Birth': '01-09-1956'}, 62: {'Name': 'Binod Kumar Pandey', 'Place': 'Ranchi', 'Departments': 'ENGG | MISC | MOTOR', 'SLA No': '33663', 'SLA Validity': '09-09-2022', 'Phone No': 9006668111.0, 'Email Id': 'binodpandey2626@gmail.com', 'Address': '204-aastha apartment-saivihan ashok ashram enclave debdut-Ranchi-834002', 'Date of Birth': '25-05-1960'}, 63: {'Name': 'Daljeet Singh', 'Place': 'Hazaribag', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '13024', 'SLA Validity': '18-05-2022', 'Phone No': 9430190793.0, 'Email Id': 'dshorra@yahoo.in', 'Address': 'Off: G.G.S.Road- Near Ananda Chowk- Hazaribag-825301- Jharkhand', 'Date of Birth': '31-07-1950'}, 64: {'Name': 'Shyamal Dey', 'Place': 'Jamshedpur', 'Departments': '', 'SLA No': '5116', 'SLA Validity': '0000-00-00', 'Phone No': 9835103093.0, 'Email Id': 'associates.dey@gmail.com', 'Address': 'Dey associates-telco-Jamshedpur-831004', 'Date of Birth': '04-01-1956'}, 65: {'Name': 'Kishor kumar saboo', 'Place': 'Ranchi', 'Departments': 'MARINE CARGO |FIRE|ENGG| MISC | MOTOR', 'SLA No': '14140', 'SLA Validity': '03-11-2022', 'Phone No': 9431161299.0, 'Email Id': 'kksaboo@yahoo.com', 'Address': '12 J.J. Road Upper Bazar-834001', 'Date of Birth': '06-01-1959'}, 66: {'Name': 'Bashir Ahmad', 'Place': 'Giridih', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '3370', 'SLA Validity': '07-11-2022', 'Phone No': 9931189588.0, 'Email Id': 'bashirahmad.er@gmail.com', 'Address': 'Bulaki Road PO&Dist Giridih (Jharkhand)-815301', 'Date of Birth': '14-07-1946'}, 67: {'Name': 'Deepak Kumar Jayaswal', 'Place': 'Ranchi', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '35446', 'SLA Validity': '0000-00-00', 'Phone No': 9835194270.0, 'Email Id': 'dkj.deepak@yahoo.co.in', 'Address': '120- Old A.G. Colony- Kadru- P.O. Doranda- Ranchi - 834002- Jharkhand', 'Date of Birth': '28-01-1960'}, 68: {'Name': 'Om Prakash Sharma', 'Place': 'Jharkhand', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '41782', 'SLA Validity': '09-06-2021', 'Phone No': 9835111128.0, 'Email Id': 'op_sharma62@yahoo.com', 'Address': 'Flat No 2A- Harivansh Enclave-Ashok Prastha Colony- By Pass Road- Dibadih-P.O. Doranda- Dist:Ranchi-834002', 'Date of Birth': '03-04-1962'}, 69: {'Name': 'Vinod Kumar Dubey', 'Place': 'Jharkand', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '46322', 'SLA Validity': '0000-00-00', 'Phone No': 9431138027.0, 'Email Id': 'vkdubeyvaluer4@gmail.com', 'Address': 'Satyam Rest House-In Front of Govt.Bus Depo-Court Road-Daltonganj', 'Date of Birth': '06-01-1963'}, 70: {'Name': 'Sarang Dhar Pandey', 'Place': 'Ranchi', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '12847', 'SLA Validity': '27-05-2022', 'Phone No': 9835134262.0, 'Email Id': 's_dpandey@yahoo.co.in', 'Address': 'Opp-162/D- Road No-4/D- Ashok Nagar-', 'Date of Birth': '02-11-1954'}, 71: {'Name': 'Manoj Kumar Singh', 'Place': 'Ranchi', 'Departments': 'MISC | MOTOR', 'SLA No': '51937', 'SLA Validity': '14-08-2023', 'Phone No': 9431105759.0, 'Email Id': 'mks18.surv@gmail.com', 'Address': 'C/o.Shri Ram Naresh Singh- Sarwamangala Appt.- 3rd Floor- Near Shibu Chowk- Sukhdeo Nagar- Ratu Road- Ranchi', 'Date of Birth': '18-01-1965'}, 72: {'Name': 'Kishori Prasad Chaurasiya', 'Place': 'Ranchi', 'Departments': 'MOTOR', 'SLA No': '6692', 'SLA Validity': '13-02-2024', 'Phone No': 9934133654.0, 'Email Id': 'kpchaurasiya.rnc@gmail.com', 'Address': 'South Samaj Street- Tharpakhna-', 'Date of Birth': '19-01-1940'}, 73: {'Name': 'Anil Kumar Anal', 'Place': 'Hazaribagh', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '33600', 'SLA Validity': '27-08-2022', 'Phone No': 9431151886.0, 'Email Id': 'a.k.anal886@gmail.com', 'Address': 'L.I.G Qr.No-89- Jharkhand State- Housing Board Colony- Sarley-', 'Date of Birth': '01-11-1959'}, 74: {'Name': 'Gyan Chandra', 'Place': 'Ranchi', 'Departments': 'ENGG | MISC | MOTOR', 'SLA No': '2943', 'SLA Validity': '11-12-2021', 'Phone No': 9431104912.0, 'Email Id': 'gyan_52@yahoo.com', 'Address': '27-Neelanchal Kothi Compound Piska More-Ratu Road-', 'Date of Birth': '04-07-1955'}, 75: {'Name': 'Ajit Kumar Sharma', 'Place': 'JAMSHEDPUR', 'Departments': 'ENGG | FIRE | MARINE CARGO | MISC | MOTOR', 'SLA No': '9818', 'SLA Validity': '04-01-2023', 'Phone No': 9830486352.0, 'Email Id': 'k.ajitsharma@gmail.com', 'Address': '3 No DUPLEX- VASUNDHARA ESTATE NH 33. NEAR IRRIGATION COLONY DIMNA; JAMSHEDPUR', 'Date of Birth': '04-02-1954'}, 76: {'Name': 'Santanu Pal', 'Place': 'Ranchi', 'Departments': 'ENGG | FIRE | MARINE CARGO', 'SLA No': '75142', 'SLA Validity': '24-09-2021', 'Phone No': 9472779159.0, 'Email Id': 'santanupalranchi@gmail.com', 'Address': 'Flat No.205-Anand Enclave-Hazari Bag Road-Near Lalpur P.S.-Lalpur-', 'Date of Birth': '04-11-1968'}, 77: {'Name': 'Ashok Kumar', 'Place': 'Hazaribagh', 'Departments': 'FIRE | MARINE CARGO | MOTOR', 'SLA No': '8976', 'SLA Validity': '19-07-2022', 'Phone No': 9431154095.0, 'Email Id': 'ashok.kumarhzb@rediffmail.com', 'Address': 'Guru Nanak Market- Main Road- Near Sadar Hospital- Hazaribagh-825301', 'Date of Birth': '17-05-1953'}, 78: {'Name': 'Shailendra Kumar Shukla', 'Place': 'Ranchi', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '9424', 'SLA Validity': '12-11-2022', 'Phone No': 9835137277.0, 'Email Id': 'shukla1640@gmail.com', 'Address': 'Krishna Nagar- Near Hotel Royal Retreat- Booty-', 'Date of Birth': '01-06-1940'}, 79: {'Name': 'Sanjay Kumar Sinha', 'Place': 'Ranchi', 'Departments': 'MOTOR', 'SLA No': '42333', 'SLA Validity': '05-07-2021', 'Phone No': 9431359223.0, 'Email Id': 'sksinha216@gmail.com', 'Address': '216- New A.G Co-operative Colony- Kadru-', 'Date of Birth': '15-09-1965'}, 80: {'Name': 'Bishal Kumar', 'Place': 'Ramgarh-Cantt', 'Departments': 'ENGG | MISC | MOTOR', 'SLA No': '39579', 'SLA Validity': '01-02-2024', 'Phone No': 9431174832.0, 'Email Id': 'bishal_kum@rediffmail.com', 'Address': 'At-Nehru Road- Sri Krishnapuri-', 'Date of Birth': '10-10-1964'}, 81: {'Name': 'Alok Kumar Mukhopadhyay', 'Place': 'Ranchi', 'Departments': 'FIRE | MARINE CARGO | MISC', 'SLA No': '4156', 'SLA Validity': '13-10-2021', 'Phone No': 9835163800.0, 'Email Id': 'alokmukho@gmail.com', 'Address': 'Adarsha Nagar- Kanke Road-', 'Date of Birth': '08-11-1951'}, 82: {'Name': 'Arun Kumar Gupta', 'Place': 'Singhbhum', 'Departments': 'MARINE CARGO | MISC | MOTOR', 'SLA No': '30472', 'SLA Validity': '0000-00-00', 'Phone No': 9431172507.0, 'Email Id': 'arun.gupta.1946@gmail.com', 'Address': 'Amlatola- Opp. ICICI Bank- P.O- Chaibasa-', 'Date of Birth': '02-05-1946'}, 83: {'Name': 'Raj Kamal Prasad Singh', 'Place': 'Hazaribag', 'Departments': 'FIRE | MARINE CARGO | MISC', 'SLA No': '23641', 'SLA Validity': '02-05-2022', 'Phone No': 9431185277.0, 'Email Id': 'rajkpsingh23@gmail.com', 'Address': 'Lake Road- Mohalla- Noora-', 'Date of Birth': '07-03-1945'}, 84: {'Name': 'Debdas Goswami', 'Place': 'Ranchi', 'Departments': 'FIRE | MISC', 'SLA No': '85086', 'SLA Validity': '13-11-2022', 'Phone No': 9934371472.0, 'Email Id': 'g_debdas@yahoo.com', 'Address': 'Adarsha Nagar- Kanke Road- Ranchi - 834008 Jharkhand', 'Date of Birth': '26-11-1960'}, 85: {'Name': 'Kumar Dushyant', 'Place': 'Supaul', 'Departments': 'MOTOR', 'SLA No': '74724', 'SLA Validity': '02-02-2023', 'Phone No': 9304801294.0, 'Email Id': 'kumar222176@gmail.com', 'Address': 'S/o Sri Murli Prasad Singh Near SBI- At/Po/PS - Birpur Distt - Supaul', 'Date of Birth': '01-01-1980'}, 86: {'Name': 'Pratik Ajmera', 'Place': 'Hazaribag', 'Departments': 'ENGG | MOTOR', 'SLA No': '85242', 'SLA Validity': '22-03-2022', 'Phone No': 9771407655.0, 'Email Id': 'pratik2ajmera@gmail.com', 'Address': 'Tara Niwas- Julu Park-', 'Date of Birth': '12-04-1987'}, 87: {'Name': 'Subhash Chandra Mishra', 'Place': 'Jameshedpur', 'Departments': '', 'SLA No': '21325', 'SLA Validity': '25-10-2021', 'Phone No': 9031057328.0, 'Email Id': 'subash_1954@yahoo.in', 'Address': 'Flat No.3356- Building No.33- Vijaya Garden- Baridih -', 'Date of Birth': '15-04-1954'}, 88: {'Name': 'Kameshwar Kumar Mittal', 'Place': 'Ranchi', 'Departments': 'ENGG | MARINE CARGO | MISC', 'SLA No': '59451', 'SLA Validity': '22-07-2020', 'Phone No': 9431333207.0, 'Email Id': 'mittalkk@yahoo.co.in', 'Address': 'Near Malti Sahu Nursing Home-Ratu Road- P.O- Hehal-', 'Date of Birth': '05-01-1971'}, 89: {'Name': 'MUKESH KUMAR AGRAWAL', 'Place': 'Ranchi', 'Departments': 'ENGG | MISC | MOTOR', 'SLA No': '15653', 'SLA Validity': '27-04-2020', 'Phone No': 9470370286.0, 'Email Id': 'mukesk_10kumar@yahoo.com', 'Address': 'St. Michael Kids School Campus- Ratu Road-P.O- Hehal-', 'Date of Birth': '01-01-1964'}, 90: {'Name': 'Gaurav Saboo', 'Place': 'Ranchi', 'Departments': 'FIRE | MARINE CARGO | MISC', 'SLA No': '120575', 'SLA Validity': '15-03-2024', 'Phone No': 9386155111.0, 'Email Id': 'saboo4u@gmail.com', 'Address': 'GF-II- Ground Floor- Arjun Mansion- Opposite Brahman Dharamsala- Bansidhar Adukia Road-', 'Date of Birth': '16-12-1988'}, 91: {'Name': 'Raghawendra Kumar Agrawal', 'Place': 'Dumka', 'Departments': 'MARINE CARGO | MOTOR', 'SLA No': '7663', 'SLA Validity': '19-10-2021', 'Phone No': 8809888544.0, 'Email Id': 'rkagrawal2k9@gmail.com', 'Address': 'Gillan Para- At-Po: Dumka-', 'Date of Birth': '15-07-1956'}, 92: {'Name': 'Himansu Thakur', 'Place': 'Jamshedpur', 'Departments': 'MOTOR', 'SLA No': '73780', 'SLA Validity': '10-09-2021', 'Phone No': 8900909068.0, 'Email Id': 'himanshuthakur2003@yahoo.co.in', 'Address': 'H.No.61- Road No.40- Baikunth Nagar- Mango-', 'Date of Birth': '16-01-1967'}, 93: {'Name': 'Arun Mehta', 'Place': 'Daltonganj', 'Departments': 'ENGG | MARINE CARGO | MOTOR', 'SLA No': '20004', 'SLA Validity': '05-05-2024', 'Phone No': 9431135212.0, 'Email Id': 'mehta708@gmail.com', 'Address': 'Shantipuri- Police Line Road-', 'Date of Birth': '01-08-1959'}, 94: {'Name': 'Suresh Kumar Sonthalia', 'Place': 'Jamshedpur', 'Departments': 'FIRE | MARINE CARGO | MOTOR', 'SLA No': '85430', 'SLA Validity': '18-06-2022', 'Phone No': 9608498676.0, 'Email Id': 'sksonthalia196011@gmail.com', 'Address': 'Bungalow Number -17- Vijaya Garden- Near Mercy Hospital- Baridih- Jamshedpur', 'Date of Birth': '11-01-1960'}, 95: {'Name': 'Radhey Shyam', 'Place': 'Hazaribag', 'Departments': 'MISC', 'SLA No': '45154', 'SLA Validity': '30-12-2018', 'Phone No': 9934575959.0, 'Email Id': 'r_shyamco@rediffmail.com', 'Address': 'Sri Ramchandra Colony- Shivpuri more- Lohsinghna- Hazaribag - 825301- Jharkhand', 'Date of Birth': '11-08-1957'}, 96: {'Name': 'Uday Lal', 'Place': 'Ranchi', 'Departments': 'MISC', 'SLA No': '67080', 'SLA Validity': '21-12-2018', 'Phone No': 8298969694.0, 'Email Id': 'udaylal0474@gmail.com', 'Address': 'Savitri Bhawan- Tangra Toli. Piskamore- Ranchi - 834005 Jharkhand', 'Date of Birth': '20-05-1969'}, 97: {'Name': 'Niraj Kumar', 'Place': 'Bokaro', 'Departments': 'MOTOR', 'SLA No': '121324', 'SLA Validity': '22-07-2022', 'Phone No': 8227070847.0, 'Email Id': 'nk2710934@gmail.com', 'Address': 'Lakari Gola- Near Ukrid More- PO- Sec/2- PS-BS. City- Bokaro - 827001 Jharkhand', 'Date of Birth': '08-12-1988'}, 98: {'Name': 'SUBODH KUMAR', 'Place': 'RAMGARH', 'Departments': 'MOTOR', 'SLA No': 'IRDA/IND/SLA-121471', 'SLA Validity': '20-11-2022', 'Phone No': 7004450849.0, 'Email Id': 'subodhkumar2691@gmail.com', 'Address': 'H.NO-51A-SAHU MOHALLAH-NEAR SHIV MANDIR-VILL PO-CHAINPUR-PS-MANDU-DIST-RAMGARH', 'Date of Birth': '02-06-1991'}, 99: {'Name': 'PRABHAT RANJAN', 'Place': 'RAMGARH CANTT.', 'Departments': 'MOTOR', 'SLA No': 'IRDA/IND/SLA-121476', 'SLA Validity': '26-11-2022', 'Phone No': 9472976077.0, 'Email Id': 'PRABHAT304@GMAIL.COM', 'Address': 'PRABHAT RANJAN- C/O- MADESHWAR SINGH- AT- BANGALI TOLA- DHANDHAR POKHAR- P.O P.S- RAMGARH CANTT.', 'Date of Birth': '22-06-1994'}, 100: {'Name': 'Pradip Kumar Jha', 'Place': 'Dhanbad', 'Departments': 'MOTOR', 'SLA No': '121563', 'SLA Validity': '05-02-2023', 'Phone No': 8002097887.0, 'Email Id': 'pradipjha08@gmail.com', 'Address': 'Qr. No. K1/115- Saharpura- P.O. -Sindri- Dist-Dhanbad', 'Date of Birth': '30-06-1985'}, 101: {'Name': 'VIJAY KUMAR SINGH', 'Place': 'Ranchi', 'Departments': 'MISC| MOTOR', 'SLA No': '121907', 'SLA Validity': '12-01-2024', 'Phone No': 9204864870.0, 'Email Id': 'vijay_xact@yahoo.com', 'Address': 'C/o- Lalan Singh- Old satyanarayan Temple- Balugadda- Fatehpur- PO- Jharia- Dist-Dhanbad- State-Jharkhand- Pin-828111. Landmark-Near Ramchandra Dal', 'Date of Birth': '02-01-1977'}, 102: {'Name': 'SANJEEV KUMAR', 'Place': 'GODDA', 'Departments': 'MOTOR', 'SLA No': '122135', 'SLA Validity': '20-05-2024', 'Phone No': 9430794449.0, 'Email Id': 'SKUMARME729@GMAIL.COM', 'Address': 'SHIVPUR- KALALI ROAD- WARD NO 04- NEAR PANI TANKI DIST-GODDA JHARKHAND', 'Date of Birth': '05-09-1990'}, 103: {'Name': 'Ankit Kumar Saxsena', 'Place': 'Palamu', 'Departments': 'MARINE CARGO | MISC', 'SLA No': '122511', 'SLA Validity': '', 'Phone No': 7004915461.0, 'Email Id': 'ankitsaxenacsit@gmail.com', 'Address': '', 'Date of Birth': ''}, 104: {'Name': 'ACHAL ASHOK', 'Place': 'HAZARIBAG', 'Departments': 'MOTOR', 'SLA No': '122701', 'SLA Validity': '', 'Phone No': 7019011582.0, 'Email Id': 'achalashok13@gmail.com', 'Address': '', 'Date of Birth': ''}, 105: {'Name': 'GHULAM ILTAZA ANSARI', 'Place': 'rANCHI', 'Departments': 'MARINE CARGO|MOTOR', 'SLA No': '123231', 'SLA Validity': '', 'Phone No': 7979948590.0, 'Email Id': 'iltazaghulam@gmail.com', 'Address': '', 'Date of Birth': ''}, 106: {'Name': '', 'Place': '', 'Departments': '', 'SLA No': '', 'SLA Validity': '', 'Phone No': '', 'Email Id': '', 'Address': '', 'Date of Birth': ''}, 107: {'Name': '', 'Place': '', 'Departments': '', 'SLA No': '', 'SLA Validity': '', 'Phone No': '', 'Email Id': '', 'Address': '', 'Date of Birth': ''}, 108: {'Name': '', 'Place': '', 'Departments': '', 'SLA No': '', 'SLA Validity': '', 'Phone No': '', 'Email Id': '', 'Address': '', 'Date of Birth': ''}, 109: {'Name': '', 'Place': '', 'Departments': '', 'SLA No': '', 'SLA Validity': '', 'Phone No': '', 'Email Id': '', 'Address': '', 'Date of Birth': ''}, 110: {'Name': '', 'Place': '', 'Departments': '', 'SLA No': '', 'SLA Validity': '', 'Phone No': '', 'Email Id': '', 'Address': '', 'Date of Birth': ''}, 111: {'Name': '', 'Place': '', 'Departments': '', 'SLA No': '', 'SLA Validity': '', 'Phone No': '', 'Email Id': '', 'Address': '', 'Date of Birth': ''}};
+
+        function showDetails(index, rowElement) {
+            const existing = document.getElementById('details-' + index);
+            if (existing) {
+                existing.remove();
+                return;
+            }
+
+            const oldDetails = document.querySelectorAll('.details-row');
+            oldDetails.forEach(row => row.remove());
+
+            const surveyor = data[index];
+            const detailsHTML = `
+                <tr class="details-row" id="details-${index}">
+                    <td colspan="3">
+                        <strong>Departments:</strong> ${surveyor["Departments"]}<br>
+                        <strong>SLA No:</strong> ${surveyor["SLA No"]}<br>
+                        <strong>SLA Validity:</strong> ${surveyor["SLA Validity"]}<br>
+                        <strong>Phone No:</strong> ${surveyor["Phone No"]}<br>
+                        <strong>Email Id:</strong> ${surveyor["Email Id"]}<br>
+                        <strong>Date of Birth:</strong> ${surveyor["Date of Birth"]}<br>
+                        <strong>Address:</strong> ${surveyor["Address"]}
+                    </td>
+                </tr>
+            `;
+            rowElement.insertAdjacentHTML('afterend', detailsHTML);
+        }
+
+        function filterTable() {
+            const inputName = document.getElementById("nameInput").value.toLowerCase();
+            const inputPlace = document.getElementById("placeInput").value.toLowerCase();
+            const inputDept = document.getElementById("deptInput").value.toLowerCase();
+            const table = document.getElementById("surveyorTable");
+            const rows = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                const nameCell = row.cells[0];
+                const placeCell = row.cells[1];
+                const deptCell = row.cells[2];
+
+                if (!nameCell || !placeCell || !deptCell) continue;
+
+                const nameText = nameCell.textContent || nameCell.innerText;
+                const placeText = placeCell.textContent || placeCell.innerText;
+                const deptText = deptCell.textContent || deptCell.innerText;
+
+                if (nameText.toLowerCase().includes(inputName) &&
+                    placeText.toLowerCase().includes(inputPlace) &&
+                    deptText.toLowerCase().includes(inputDept)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                    const nextRow = rows[i + 1];
+                    if (nextRow && nextRow.classList.contains("details-row")) {
+                        nextRow.remove();
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Surveyor Dashboard - Jharkhand</h1>
+
+    <input type="text" id="nameInput" onkeyup="filterTable()" placeholder="Search by Name">
+    <input type="text" id="placeInput" onkeyup="filterTable()" placeholder="Search by Place">
+    <input type="text" id="deptInput" onkeyup="filterTable()" placeholder="Search by Department">
+
+    <table id="surveyorTable">
+        <thead>
+            <tr><th>Name</th><th>Place</th><th>Department</th></tr>
+        </thead>
+        <tbody>
+            
+            <tr onclick="showDetails(0, this)">
+                <td>Swapan Kumar Sadhu</td>
+                <td>Jamshedpur</td>
+                <td>FIRE | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(1, this)">
+                <td>Asoke Kumar Jana</td>
+                <td>Dumka</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(2, this)">
+                <td>Brijnandan Narayan Singh</td>
+                <td>Ramgarh Cantt</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(3, this)">
+                <td>Sanjay Kumar Singh</td>
+                <td>Dhanbad</td>
+                <td>ENGG | MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(4, this)">
+                <td>Upendra Narayan Singh</td>
+                <td>Dhanbad</td>
+                <td>ENGG | FIRE | MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(5, this)">
+                <td>Rajesh Ranjan Singh</td>
+                <td>Dhanbad</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(6, this)">
+                <td>Rakesh Kumar</td>
+                <td>Dhanbad</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(7, this)">
+                <td>Shyam Narayan Jha</td>
+                <td>Deoghar</td>
+                <td>ENGG | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(8, this)">
+                <td>Suresh Kumar Saraff</td>
+                <td>Deoghar</td>
+                <td>FIRE | MARINE CARGO | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(9, this)">
+                <td>Sanjay Kumar</td>
+                <td>Bokaro</td>
+                <td>ENGG | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(10, this)">
+                <td>Surendra Kumar</td>
+                <td>Bokaro</td>
+                <td>ENGG | FIRE | MARINE CARGO</td>
+            </tr>
+            
+            <tr onclick="showDetails(11, this)">
+                <td>Kishore Kumar Jha</td>
+                <td>Deoghar</td>
+                <td>ENGG | MISC</td>
+            </tr>
+            
+            <tr onclick="showDetails(12, this)">
+                <td>Abhijit Ghosh</td>
+                <td>Jharkhand</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(13, this)">
+                <td>Dhananjay Mishra</td>
+                <td>Bokaro</td>
+                <td>MISC</td>
+            </tr>
+            
+            <tr onclick="showDetails(14, this)">
+                <td>Nirmalendu Paul</td>
+                <td>Dhanbad</td>
+                <td>ENGG | FIRE | MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(15, this)">
+                <td>Jitendra Kumar Singh</td>
+                <td>Deoghar</td>
+                <td>FIRE | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(16, this)">
+                <td>Gurumukh Singh</td>
+                <td>Jharkhand</td>
+                <td>ENGG | MARINE CARGO | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(17, this)">
+                <td>Ajay Kishore Lall</td>
+                <td>Bokaro</td>
+                <td>ENGG | MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(18, this)">
+                <td>Anil Kumar Singh</td>
+                <td>Jamshedpur</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(19, this)">
+                <td>Rabindranath Singh Kushwaha</td>
+                <td>Dhanbad</td>
+                <td>ENGG | MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(20, this)">
+                <td>Ajit Kumar Chatterjee</td>
+                <td>Dhanbad</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(21, this)">
+                <td>Surya Narayan Rajgarhia</td>
+                <td>Ranchi</td>
+                <td>FIRE | MARINE CARGO | MISC</td>
+            </tr>
+            
+            <tr onclick="showDetails(22, this)">
+                <td>Motilal Sanatan</td>
+                <td>Dhanbad</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(23, this)">
+                <td>Ranjeet Kumar</td>
+                <td>Bokaro</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(24, this)">
+                <td>Sunil Kumar Singh</td>
+                <td>Dhanbad</td>
+                <td>ENGG | FIRE | MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(25, this)">
+                <td>Santan Prasad Sinha</td>
+                <td>Jharkhand</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(26, this)">
+                <td>Promode Yadav</td>
+                <td>Jamshedpur</td>
+                <td>ENGG | MARINE CARGO | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(27, this)">
+                <td>Shashi Bhushan</td>
+                <td>Bokaro</td>
+                <td>ENGG | FIRE | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(28, this)">
+                <td>Mohan Lal Agarwala</td>
+                <td>Giridih</td>
+                <td>FIRE | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(29, this)">
+                <td>Ranvir Kumar</td>
+                <td>Giridih</td>
+                <td>FIRE | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(30, this)">
+                <td>Sanjiv Kumar</td>
+                <td>Deoghar</td>
+                <td>ENGG | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(31, this)">
+                <td>Sandeep Kumar Mitra</td>
+                <td>Ghatsila</td>
+                <td>MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(32, this)">
+                <td>VIDYA BHUSHAN PRASAD</td>
+                <td>Ranchi</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(33, this)">
+                <td>Satish Prasad</td>
+                <td>Bokaro</td>
+                <td>FIRE | MARINE CARGO | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(34, this)">
+                <td>Krishna Kumar</td>
+                <td>Bokaro Steel City</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(35, this)">
+                <td>Ranjit Kumar Singh</td>
+                <td>Jameshedpur</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(36, this)">
+                <td>Haribinder Singh</td>
+                <td>Jameshedpur</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(37, this)">
+                <td>Mangal Deo Shukla</td>
+                <td>JAMSHEDPUR</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(38, this)">
+                <td>Ajit Kumar Sahu</td>
+                <td>Ranchi</td>
+                <td>ENGG | FIRE | MISC</td>
+            </tr>
+            
+            <tr onclick="showDetails(39, this)">
+                <td>Birendra Kumar Gupta</td>
+                <td>Ranchi</td>
+                <td>FIRE | MARINE CARGO | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(40, this)">
+                <td>Lalit Kumar Singh</td>
+                <td>Ranchi</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(41, this)">
+                <td>Anirudh Kumar</td>
+                <td>Dhurwa</td>
+                <td>FIRE|MARINECAGO |ENGG | MISC | MOTOR|</td>
+            </tr>
+            
+            <tr onclick="showDetails(42, this)">
+                <td>Shankar Kumar Singh</td>
+                <td>Ranchi</td>
+                <td>FIRE| MARINE CARGO| ENGG | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(43, this)">
+                <td>Arvind Kumar</td>
+                <td>Ranchi</td>
+                <td>ENGG | FIRE | MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(44, this)">
+                <td>Binodanand Jha</td>
+                <td>Ranchi</td>
+                <td>ENGG | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(45, this)">
+                <td>Rakesh Prasad Sinha</td>
+                <td>Chas</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(46, this)">
+                <td>Shiwa Brata Ghose</td>
+                <td>Ranchi</td>
+                <td>ENGG | MARINE CARGO | MISC</td>
+            </tr>
+            
+            <tr onclick="showDetails(47, this)">
+                <td>Dilip Kumar Agarwal</td>
+                <td>Ranchi</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(48, this)">
+                <td>Jajulya Kumar Das</td>
+                <td>Jamshedpur</td>
+                <td>ENGG | MARINE CARGO | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(49, this)">
+                <td>Binod Kumar Bhardwaj</td>
+                <td>JAMSHEDPUR</td>
+                <td>MARINE CARGO | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(50, this)">
+                <td>Sanjay Kumar</td>
+                <td>Jamshedpur</td>
+                <td>MARINE CARGO | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(51, this)">
+                <td>Krishna Kumar Singh</td>
+                <td>Jamshedpur</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(52, this)">
+                <td>Bhola Prasad Singh</td>
+                <td>RANCHI</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(53, this)">
+                <td>NAVIN KUMAR</td>
+                <td>RANCHI</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(54, this)">
+                <td>Deepak Lal</td>
+                <td>Ranchi</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(55, this)">
+                <td>Shyam Sunder Prasad Singh</td>
+                <td>Ranchi</td>
+                <td>MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(56, this)">
+                <td>Sanjay Kumar</td>
+                <td>Ranchi</td>
+                <td>LOP | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(57, this)">
+                <td>Satbir Singh Bhatia</td>
+                <td>Jamshedpur</td>
+                <td>FIRE | MARINE CARGO | MISC</td>
+            </tr>
+            
+            <tr onclick="showDetails(58, this)">
+                <td>Manoj Kumar</td>
+                <td>Ranchi</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(59, this)">
+                <td>Birjisut Towheed</td>
+                <td>Ranchi</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(60, this)">
+                <td>Shakil Ahmed</td>
+                <td>Ranchi</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(61, this)">
+                <td>Anil Kumar Bazaz</td>
+                <td>Ranchi</td>
+                <td>ENGG | MARINE CARGO | MOTOR|</td>
+            </tr>
+            
+            <tr onclick="showDetails(62, this)">
+                <td>Binod Kumar Pandey</td>
+                <td>Ranchi</td>
+                <td>ENGG | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(63, this)">
+                <td>Daljeet Singh</td>
+                <td>Hazaribag</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(64, this)">
+                <td>Shyamal Dey</td>
+                <td>Jamshedpur</td>
+                <td></td>
+            </tr>
+            
+            <tr onclick="showDetails(65, this)">
+                <td>Kishor kumar saboo</td>
+                <td>Ranchi</td>
+                <td>MARINE CARGO |FIRE|ENGG| MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(66, this)">
+                <td>Bashir Ahmad</td>
+                <td>Giridih</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(67, this)">
+                <td>Deepak Kumar Jayaswal</td>
+                <td>Ranchi</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(68, this)">
+                <td>Om Prakash Sharma</td>
+                <td>Jharkhand</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(69, this)">
+                <td>Vinod Kumar Dubey</td>
+                <td>Jharkand</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(70, this)">
+                <td>Sarang Dhar Pandey</td>
+                <td>Ranchi</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(71, this)">
+                <td>Manoj Kumar Singh</td>
+                <td>Ranchi</td>
+                <td>MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(72, this)">
+                <td>Kishori Prasad Chaurasiya</td>
+                <td>Ranchi</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(73, this)">
+                <td>Anil Kumar Anal</td>
+                <td>Hazaribagh</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(74, this)">
+                <td>Gyan Chandra</td>
+                <td>Ranchi</td>
+                <td>ENGG | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(75, this)">
+                <td>Ajit Kumar Sharma</td>
+                <td>JAMSHEDPUR</td>
+                <td>ENGG | FIRE | MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(76, this)">
+                <td>Santanu Pal</td>
+                <td>Ranchi</td>
+                <td>ENGG | FIRE | MARINE CARGO</td>
+            </tr>
+            
+            <tr onclick="showDetails(77, this)">
+                <td>Ashok Kumar</td>
+                <td>Hazaribagh</td>
+                <td>FIRE | MARINE CARGO | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(78, this)">
+                <td>Shailendra Kumar Shukla</td>
+                <td>Ranchi</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(79, this)">
+                <td>Sanjay Kumar Sinha</td>
+                <td>Ranchi</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(80, this)">
+                <td>Bishal Kumar</td>
+                <td>Ramgarh-Cantt</td>
+                <td>ENGG | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(81, this)">
+                <td>Alok Kumar Mukhopadhyay</td>
+                <td>Ranchi</td>
+                <td>FIRE | MARINE CARGO | MISC</td>
+            </tr>
+            
+            <tr onclick="showDetails(82, this)">
+                <td>Arun Kumar Gupta</td>
+                <td>Singhbhum</td>
+                <td>MARINE CARGO | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(83, this)">
+                <td>Raj Kamal Prasad Singh</td>
+                <td>Hazaribag</td>
+                <td>FIRE | MARINE CARGO | MISC</td>
+            </tr>
+            
+            <tr onclick="showDetails(84, this)">
+                <td>Debdas Goswami</td>
+                <td>Ranchi</td>
+                <td>FIRE | MISC</td>
+            </tr>
+            
+            <tr onclick="showDetails(85, this)">
+                <td>Kumar Dushyant</td>
+                <td>Supaul</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(86, this)">
+                <td>Pratik Ajmera</td>
+                <td>Hazaribag</td>
+                <td>ENGG | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(87, this)">
+                <td>Subhash Chandra Mishra</td>
+                <td>Jameshedpur</td>
+                <td></td>
+            </tr>
+            
+            <tr onclick="showDetails(88, this)">
+                <td>Kameshwar Kumar Mittal</td>
+                <td>Ranchi</td>
+                <td>ENGG | MARINE CARGO | MISC</td>
+            </tr>
+            
+            <tr onclick="showDetails(89, this)">
+                <td>MUKESH KUMAR AGRAWAL</td>
+                <td>Ranchi</td>
+                <td>ENGG | MISC | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(90, this)">
+                <td>Gaurav Saboo</td>
+                <td>Ranchi</td>
+                <td>FIRE | MARINE CARGO | MISC</td>
+            </tr>
+            
+            <tr onclick="showDetails(91, this)">
+                <td>Raghawendra Kumar Agrawal</td>
+                <td>Dumka</td>
+                <td>MARINE CARGO | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(92, this)">
+                <td>Himansu Thakur</td>
+                <td>Jamshedpur</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(93, this)">
+                <td>Arun Mehta</td>
+                <td>Daltonganj</td>
+                <td>ENGG | MARINE CARGO | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(94, this)">
+                <td>Suresh Kumar Sonthalia</td>
+                <td>Jamshedpur</td>
+                <td>FIRE | MARINE CARGO | MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(95, this)">
+                <td>Radhey Shyam</td>
+                <td>Hazaribag</td>
+                <td>MISC</td>
+            </tr>
+            
+            <tr onclick="showDetails(96, this)">
+                <td>Uday Lal</td>
+                <td>Ranchi</td>
+                <td>MISC</td>
+            </tr>
+            
+            <tr onclick="showDetails(97, this)">
+                <td>Niraj Kumar</td>
+                <td>Bokaro</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(98, this)">
+                <td>SUBODH KUMAR</td>
+                <td>RAMGARH</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(99, this)">
+                <td>PRABHAT RANJAN</td>
+                <td>RAMGARH CANTT.</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(100, this)">
+                <td>Pradip Kumar Jha</td>
+                <td>Dhanbad</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(101, this)">
+                <td>VIJAY KUMAR SINGH</td>
+                <td>Ranchi</td>
+                <td>MISC| MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(102, this)">
+                <td>SANJEEV KUMAR</td>
+                <td>GODDA</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(103, this)">
+                <td>Ankit Kumar Saxsena</td>
+                <td>Palamu</td>
+                <td>MARINE CARGO | MISC</td>
+            </tr>
+            
+            <tr onclick="showDetails(104, this)">
+                <td>ACHAL ASHOK</td>
+                <td>HAZARIBAG</td>
+                <td>MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(105, this)">
+                <td>GHULAM ILTAZA ANSARI</td>
+                <td>rANCHI</td>
+                <td>MARINE CARGO|MOTOR</td>
+            </tr>
+            
+            <tr onclick="showDetails(106, this)">
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            
+            <tr onclick="showDetails(107, this)">
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            
+            <tr onclick="showDetails(108, this)">
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            
+            <tr onclick="showDetails(109, this)">
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            
+            <tr onclick="showDetails(110, this)">
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            
+            <tr onclick="showDetails(111, this)">
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            
+        </tbody>
+    </table>
+</body>
+</html>
